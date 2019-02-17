@@ -48,8 +48,9 @@
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach;?>                              
-                    
+                    <?php endforeach;?>
+                    <!--Навигация под страницой-->
+                    <?php echo $pagination->get(); ?>
                 </div><!--features_items-->
 
             </div>
