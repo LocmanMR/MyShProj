@@ -2,7 +2,7 @@
 
 class ProductController
 {
-    public function actionView($productId)
+    public function actionView($productId): bool
     {
         $categories = [];
         $categories = Category::getCategoriesList();

@@ -2,7 +2,7 @@
 
 class SiteController
 {
-    public function actionIndex()
+    public function actionIndex(): bool
     {
         $categories = [];
         $categories = Category::getCategoriesList();

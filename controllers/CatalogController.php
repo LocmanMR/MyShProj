@@ -2,7 +2,7 @@
 
 class CatalogController
 {
-    public function actionIndex()
+    public function actionIndex(): bool
     {
         $categories = [];
         $categories = Category::getCategoriesList();
@@ -14,7 +14,7 @@ class CatalogController
         return true;
     }
 
-    public function actionCategory($categoryId, $page = 1)
+    public function actionCategory($categoryId, $page = 1): bool
     {
         $categories = [];
         $categories = Category::getCategoriesList();

@@ -58,7 +58,7 @@ class Product
         }
     }
 
-    public static function getProductById($id)
+    public static function getProductById($id): array
     {
         $id = intval($id);
 
@@ -75,7 +75,7 @@ class Product
      * @param integer $categoryId
      * @return integer
      */
-    public static function getTotalProductsInCategory($categoryId)
+    public static function getTotalProductsInCategory($categoryId): int
     {
         $db = Db::getConnection();
 

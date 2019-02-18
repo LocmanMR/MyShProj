@@ -7,6 +7,8 @@ return [
     'category/([0-9]+)/page-([0-9]+)' => 'catalog/category/$1/$2', //actionCategory в CatalogController
     'category/([0-9]+)' => 'catalog/category/$1', //actionCategory в CatalogController
 
+    'user/register' => 'user/register',  // UserController
+
     '' => 'site/index', //acrionIndex в SiteController
     /*
     'news/([0-9]+)' => 'news/view/$1', //actionView в NewsController
