@@ -72,8 +72,6 @@ class Product
 
     /**
      * Возвращаем количество товаров в указанной категории
-     * @param integer $categoryId
-     * @return integer
      */
     public static function getTotalProductsInCategory($categoryId): int
     {
@@ -84,5 +82,32 @@ class Product
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $row = $result->fetch();
         return $row['count'];
+    }
+
+    //Возвращает список товаров с указанными индентификторами
+    public static function getProductsByIds($idsArray): array
+    {
+        $db = Db::getConnection();
+
+        // Превращаем массив в строку для формирования условия в запросе
+        $idsString = implode(',', $idsArray);
+
+        $sql = "SELECT * FROM product WHERE status='1' AND id IN ($idsString)";
+
+        $result = $db->query($sql);
+
+        // Указываем, что хотим получить данные в виде массива
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        $i = 0;
+        $products = array();
+        while ($row = $result->fetch()) {
+            $products[$i]['id'] = $row['id'];
+            $products[$i]['code'] = $row['code'];
+            $products[$i]['name'] = $row['name'];
+            $products[$i]['price'] = $row['price'];
+            $i++;
+        }
+        return $products;
     }
 }
