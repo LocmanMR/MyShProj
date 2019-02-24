@@ -110,4 +110,22 @@ class Product
         }
         return $products;
     }
+    public static function getRecommendedProducts(): array
+    {
+        $db = Db::getConnection();
+
+        $result = $db->query('SELECT id, name, price, is_new FROM product '
+            . 'WHERE status = "1" AND is_recommended = "1" '
+            . 'ORDER BY id DESC');
+        $i = 0;
+        $productsList = array();
+        while ($row = $result->fetch()) {
+            $productsList[$i]['id'] = $row['id'];
+            $productsList[$i]['name'] = $row['name'];
+            $productsList[$i]['price'] = $row['price'];
+            $productsList[$i]['is_new'] = $row['is_new'];
+            $i++;
+        }
+        return $productsList;
+    }
 }
