@@ -138,4 +138,11 @@ class User
         $result->bindParam(':password', $password, PDO::PARAM_STR);
         return $result->execute();
     }
+    public static function checkPhone($phone): bool
+    {
+        if (strlen($phone) >= 10) {
+            return true;
+        }
+        return false;
+    }
 }
