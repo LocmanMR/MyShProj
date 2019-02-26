@@ -45,11 +45,16 @@ Class Cart
 
     public static function getTotalPrice($products): int
     {
+        // Получаем массив с идентификаторами и количеством товаров в корзине
         $productsInCart = self::getProducts();
 
+        // Подсчитываем общую стоимость
+        $total = 0;
         if ($productsInCart) {
-            $total = 0;
+            // Если в корзине не пусто
+            // Проходим по переданному в метод массиву товаров
             foreach ($products as $item) {
+                // Находим общую стоимость: цена товара * количество товара
                 $total += $item['price'] * $productsInCart[$item['id']];
             }
         }
@@ -74,5 +79,4 @@ Class Cart
         // Записываем массив товаров с удаленным элементом в сессию
         $_SESSION['products'] = $productsInCart;
     }
-
 }

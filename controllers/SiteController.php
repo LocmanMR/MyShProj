@@ -4,11 +4,16 @@ class SiteController
 {
     public function actionIndex(): bool
     {
+        //Список категорий
         $categories = [];
         $categories = Category::getCategoriesList();
 
+        //список для послдених товаров
         $latestProducts = [];
         $latestProducts = Product::getLatestProducts(3);
+
+        //список для товаров из слайдера
+        $sliderProducts = Product::getRecommendedProducts();
 
         require_once(ROOT . '/views/site/index.php');
         return true;
@@ -42,5 +47,11 @@ class SiteController
         require_once(ROOT . '/views/site/contact.php');
         return true;
     }
-
+    //Страница о Магазине
+    public function actionAbout()
+    {
+        // Подключаем вид
+        require_once(ROOT . '/views/site/about.php');
+        return true;
+    }
 }

@@ -18,6 +18,15 @@ class CartController
         return true;
     }
 
+    public function actionDelete($id)
+    {
+        // Удаляем заданный товар из корзины
+        Cart::deleteProduct($id);
+
+        // Возвращаем пользователя в корзину
+        header("Location: /cart");
+    }
+
     public function actionIndex()
     {
         $categories = [];
@@ -39,6 +48,7 @@ class CartController
         require_once(ROOT.'/views/cart/index.php');
     }
 
+
     //Оформление покупки
     public function actionCheckout()
     {
@@ -51,7 +61,7 @@ class CartController
         $categories = Category::getCategoriesList();
 
         $productsIds = array_keys($productsInCart);
-        $products = Product::getProdustsByIds($productsIds);
+        $products = Product::getProductsByIds($productsIds);
         $totalPrice = Cart::getTotalPrice($products);
 
         $totalQuantity = Cart::countItems();
@@ -92,7 +102,7 @@ class CartController
 
                 if ($result) {
                     $adminEmail = '';
-                    $message = '<a href="http://digital-mafia.net/admin/orders">Список заказов</a>';
+                    $message = '<a href="">Список заказов</a>';
                     $subject = 'Новый заказ!';
                     mail($adminEmail, $subject, $message);
                     Cart::clear();
@@ -101,13 +111,5 @@ class CartController
         }
         require_once(ROOT . '/views/cart/checkout.php');
         return true;
-    }
-    public function actionDelete($id)
-    {
-        // Удаляем заданный товар из корзины
-        Cart::deleteProduct($id);
-
-        // Возвращаем пользователя в корзину
-        header("Location: /cart");
     }
 }

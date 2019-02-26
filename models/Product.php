@@ -2,9 +2,10 @@
 
 class Product
 {
-
+    // кол-во отоброжаемых товаров по умолчанию на главной
     const SHOW_BY_DEFAULT = 6;
 
+    //Возвращает массив последних товаров
     public static function getLatestProducts($count = self::SHOW_BY_DEFAULT): array
     {
         $count = intval($count);
@@ -29,6 +30,7 @@ class Product
         return $productsList;
     }
 
+    //Возвращает список товаров по категориям
     public static function getProductsListByCategory($categoryId = false, $page = 1): array
     {
         if ($categoryId) {
@@ -41,8 +43,8 @@ class Product
             $result = $db->query("SELECT id, name, price, image, is_new FROM product "
                 . "WHERE status = '1' AND category_id = '$categoryId' "
                 . "ORDER BY id ASC "
-                . "LIMIT ".self::SHOW_BY_DEFAULT
-                . ' OFFSET '. $offset);
+                . "LIMIT " . self::SHOW_BY_DEFAULT
+                . ' OFFSET ' . $offset);
 
             $i = 0;
             while ($row = $result->fetch()) {
@@ -58,27 +60,27 @@ class Product
         }
     }
 
+    //Возвращает продукт с указанным ID
     public static function getProductById($id): array
     {
         $id = intval($id);
 
         if ($id) {
             $db = db::getConnection();
-            $result = $db->query('SELECT * FROM product WHERE id ='. $id);
+            $result = $db->query('SELECT * FROM product WHERE id =' . $id);
             $result->setFetchMode(PDO::FETCH_ASSOC);
             return $result->fetch();
         }
     }
 
-    /**
-     * Возвращаем количество товаров в указанной категории
-     */
+
+    //Возвращаем количество товаров в указанной категории
     public static function getTotalProductsInCategory($categoryId): int
     {
         $db = Db::getConnection();
 
         $result = $db->query('SELECT count(id) AS count FROM product '
-            . 'WHERE status="1" AND category_id ='.$categoryId);
+            . 'WHERE status="1" AND category_id =' . $categoryId);
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $row = $result->fetch();
         return $row['count'];
@@ -100,7 +102,7 @@ class Product
         $result->setFetchMode(PDO::FETCH_ASSOC);
 
         $i = 0;
-        $products = array();
+        $products = [];
         while ($row = $result->fetch()) {
             $products[$i]['id'] = $row['id'];
             $products[$i]['code'] = $row['code'];
@@ -110,6 +112,8 @@ class Product
         }
         return $products;
     }
+
+    //Возвращает список рекомендуемых товаров
     public static function getRecommendedProducts(): array
     {
         $db = Db::getConnection();
@@ -118,7 +122,7 @@ class Product
             . 'WHERE status = "1" AND is_recommended = "1" '
             . 'ORDER BY id DESC');
         $i = 0;
-        $productsList = array();
+        $productsList = [];
         while ($row = $result->fetch()) {
             $productsList[$i]['id'] = $row['id'];
             $productsList[$i]['name'] = $row['name'];
@@ -127,30 +131,5 @@ class Product
             $i++;
         }
         return $productsList;
-    }
-
-    public static function getProdustsByIds($idsArray)
-    {
-        $products = array();
-
-        $db = Db::getConnection();
-
-        $idsString = implode(',', $idsArray);
-
-        $sql = "SELECT * FROM product WHERE status='1' AND id IN ($idsString)";
-
-        $result = $db->query($sql);
-        $result->setFetchMode(PDO::FETCH_ASSOC);
-
-        $i = 0;
-        while ($row = $result->fetch()) {
-            $products[$i]['id'] = $row['id'];
-            $products[$i]['code'] = $row['code'];
-            $products[$i]['name'] = $row['name'];
-            $products[$i]['price'] = $row['price'];
-            $i++;
-        }
-
-        return $products;
     }
 }
