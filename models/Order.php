@@ -1,16 +1,12 @@
 <?php
 
-/**
- * Класс Order - модель для работы с заказами
- */
+//Класс Order - модель для работы с заказами
 class Order
 {
     public static function save(string $userName, string $userPhone, string $userComment, int $userId,
                                 array $products): bool
     {
         $db = Db::getConnection();
-
-        // Текст запроса к БД
         $sql = 'INSERT INTO product_order (user_name, user_phone, user_comment, user_id, products) '
             . 'VALUES (:user_name, :user_phone, :user_comment, :user_id, :products)';
 
@@ -32,7 +28,7 @@ class Order
         $db = Db::getConnection();
 
         $result = $db->query('SELECT id, user_name, user_phone, date, status FROM product_order ORDER BY id DESC');
-        $ordersList = array();
+        $ordersList = [];
         $i = 0;
         while ($row = $result->fetch()) {
             $ordersList[$i]['id'] = $row['id'];

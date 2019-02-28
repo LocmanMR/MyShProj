@@ -33,8 +33,8 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="/template/images/home/product1.jpg" alt=""/>
-                                            <h2><?php echo $product['price']; ?>$</h2>
+                                            <img src="<?php echo Product::getImage($product['id']); ?>" alt=""/>
+                                            <h2>$<?php echo $product['price']; ?></h2>
                                             <p>
                                                 <a href="/product/<?php echo $product['id']; ?>">
                                                     <?php echo $product['name']; ?>
@@ -52,9 +52,11 @@
                                 </div>
                             </div>
                         <?php endforeach; ?>
-                        <!--Навигация под страницой-->
-                        <?php echo $pagination->get(); ?>
+
                     </div><!--features_items-->
+
+                    <!-- Постраничная навигация -->
+                    <?php echo $pagination->get(); ?>
 
                 </div>
             </div>

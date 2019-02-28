@@ -2,7 +2,7 @@
 
 Class Cart
 {
-    public static function addProduct($id): int
+    public static function addProduct(int $id): int
     {
         $id = intval($id);
         $productsInCart = [];
@@ -43,7 +43,7 @@ Class Cart
         return false;
     }
 
-    public static function getTotalPrice($products): int
+    public static function getTotalPrice(array $products): int
     {
         // Получаем массив с идентификаторами и количеством товаров в корзине
         $productsInCart = self::getProducts();
@@ -68,7 +68,7 @@ Class Cart
         }
     }
 
-    public static function deleteProduct($id)
+    public static function deleteProduct(int $id)
     {
         // Получаем массив с идентификаторами и количеством товаров в корзине
         $productsInCart = self::getProducts();

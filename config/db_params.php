@@ -2,7 +2,7 @@
 
 return [
     'host' => 'localhost',
-    'dbname' => 'super_mag',
+    'dbname' => 'phpshop',
     'user' => 'root',
     'password' => '',
 ];

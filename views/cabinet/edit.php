@@ -24,9 +24,10 @@
                                 <input type="text" name="name" placeholder="Имя" value="<?php echo $name; ?>"/>
 
                                 <p>Пароль:</p>
-                                <input type="password" name="password" placeholder="Пароль" value="<?php echo $password; ?>"/>
+                                <input type="password" name="password" placeholder="Пароль"
+                                       value="<?php echo $password; ?>"/>
                                 <br/>
-                                <input type="submit" name="submit" class="btn btn-default" value="Сохранить" />
+                                <input type="submit" name="submit" class="btn btn-default" value="Сохранить"/>
                             </form>
                         </div><!--/sign up form-->
 

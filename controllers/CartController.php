@@ -3,7 +3,7 @@
 class CartController
 {
 
-    public function actionAdd($id)
+    public function actionAdd(int $id)
     {
         Cart::addProduct($id);
         //Возвращаем пользователя на тсраницу
@@ -11,14 +11,14 @@ class CartController
         header("Location: $referrer");
     }
 
-    public function actionAddAjax($id): bool
+    public function actionAddAjax(int $id): bool
     {
         //Добавляем товар в корзину
         echo Cart::addProduct($id);
         return true;
     }
 
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
         // Удаляем заданный товар из корзины
         Cart::deleteProduct($id);
